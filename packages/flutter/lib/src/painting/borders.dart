@@ -600,7 +600,7 @@ abstract class OutlinedBorder extends ShapeBorder {
   const OutlinedBorder({ this.side = BorderSide.none }) : assert(side != null);
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.strokeInset);
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(math.max(side.strokeInset, 0));
 
   /// The border outline's color and weight.
   ///
