@@ -129,6 +129,7 @@ class BorderSide with Diagnosticable {
     return BorderSide(
       color: a.color, // == b.color
       width: a.width + b.width,
+      strokeAlign: (a.strokeAlign + b.strokeAlign) / 2,
       style: a.style, // == b.style
     );
   }
@@ -255,8 +256,7 @@ class BorderSide with Diagnosticable {
       return true;
     }
     return a.style == b.style
-        && a.color == b.color
-        && a.strokeAlign == b.strokeAlign;
+        && a.color == b.color;
   }
 
   /// Linearly interpolate between two border sides.
@@ -354,12 +354,15 @@ class BorderSide with Diagnosticable {
   int get hashCode => Object.hash(color, width, style, strokeAlign);
 
   @override
+  String toStringShort() => 'BorderSide';
+
+  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Color>('color', color, defaultValue: const Color(0xFF000000)));
     properties.add(DoubleProperty('width', width, defaultValue: 1.0));
-    properties.add(DoubleProperty('strokeAlign', strokeAlign, defaultValue: strokeAlignCenter));
-    properties.add(EnumProperty<BorderStyle>('style', style, defaultValue: BorderStyle.none));
+    properties.add(DoubleProperty('strokeAlign', strokeAlign, defaultValue: strokeAlignInside));
+    properties.add(EnumProperty<BorderStyle>('style', style, defaultValue: BorderStyle.solid));
   }
 }
 
