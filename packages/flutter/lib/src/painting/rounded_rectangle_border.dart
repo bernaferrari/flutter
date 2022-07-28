@@ -105,7 +105,7 @@ class RoundedRectangleBorder extends OutlinedBorder {
   @override
   Path getOuterPath(Rect rect, { TextDirection? textDirection }) {
     return Path()
-      ..addRRect(borderRadius.resolve(textDirection).toRRect(rect).deflate(side.strokeInset));
+      ..addRRect(borderRadius.resolve(textDirection).toRRect(rect));
   }
 
   @override
@@ -114,12 +114,16 @@ class RoundedRectangleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        final Paint paint = Paint()
-          ..color = side.color;
-        final RRect borderRect = borderRadius.resolve(textDirection).toRRect(rect);
-        final RRect inner = borderRect.deflate(side.strokeInset);
-        final RRect outer = borderRect.inflate(side.strokeOutset);
-        canvas.drawDRRect(outer, inner, paint);
+        if (borderRadius == BorderRadius.zero) {
+          canvas.drawRect(rect.inflate(side.strokeOffset / 2), side.toPaint());
+        } else {
+          final Paint paint = Paint()
+            ..color = side.color;
+          final RRect borderRect = borderRadius.resolve(textDirection).toRRect(rect);
+          final RRect inner = borderRect.deflate(side.strokeInset);
+          final RRect outer = borderRect.inflate(side.strokeOutset);
+          canvas.drawDRRect(outer, inner, paint);
+        }
     }
   }
 

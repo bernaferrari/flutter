@@ -697,7 +697,7 @@ class BorderDirectional extends BoxBorder {
       // side.strokeAlign == StrokeAlign.inside => 0 -> side.width
       // side.strokeAlign == BorderSide.strokeAlignCenter => 0.5 -> side.width / 2
       // side.strokeAlign == BorderSide.strokeAlignOutside => 1 -> 0
-      return EdgeInsets.all(top.strokeInset);
+      return EdgeInsetsDirectional.all(top.strokeInset);
     }
     return EdgeInsetsDirectional.fromSTEB(start.strokeInset, top.strokeInset, end.strokeInset, bottom.strokeInset);
   }

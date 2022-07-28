@@ -96,7 +96,7 @@ class StadiumBorder extends OutlinedBorder {
   Path getOuterPath(Rect rect, { TextDirection? textDirection }) {
     final Radius radius = Radius.circular(rect.shortestSide / 2.0);
     return Path()
-      ..addRRect(RRect.fromRectAndRadius(rect, radius).inflate(side.strokeOffset));
+      ..addRRect(RRect.fromRectAndRadius(rect, radius));
   }
 
   @override
@@ -258,7 +258,7 @@ class _StadiumToCircleBorder extends OutlinedBorder {
   @override
   Path getOuterPath(Rect rect, { TextDirection? textDirection }) {
     return Path()
-      ..addRRect(_adjustBorderRadius(rect).toRRect(_adjustRect(rect)).inflate(side.strokeOutset));
+      ..addRRect(_adjustBorderRadius(rect).toRRect(_adjustRect(rect)));
   }
 
   @override
