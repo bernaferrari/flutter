@@ -281,7 +281,7 @@ class _StadiumToCircleBorder extends OutlinedBorder {
           canvas.drawRRect(_adjustBorderRadius(rect).toRRect(_adjustRect(rect)), side.toPaint());
         } else {
           final RRect borderRect = _adjustBorderRadius(rect).toRRect(_adjustRect(rect));
-          canvas.drawRRect(borderRect.inflate(side.strokeOffset), side.toPaint());
+          canvas.drawRRect(borderRect.inflate(side.strokeOffset / 2), side.toPaint());
         }
     }
   }
@@ -424,10 +424,10 @@ class _StadiumToRoundedRectangleBorder extends OutlinedBorder {
       case BorderStyle.solid:
         final BorderRadius adjustedBorderRadius = _adjustBorderRadius(rect);
         if (adjustedBorderRadius == BorderRadius.zero) {
-          canvas.drawRect(rect.inflate(side.strokeOffset), side.toPaint());
+          canvas.drawRect(rect.inflate(side.strokeOffset / 2), side.toPaint());
         } else {
           final RRect borderRect = adjustedBorderRadius.resolve(textDirection).toRRect(rect);
-          canvas.drawRRect(borderRect.inflate(side.strokeOffset), side.toPaint());
+          canvas.drawRRect(borderRect.inflate(side.strokeOffset / 2), side.toPaint());
         }
     }
   }
