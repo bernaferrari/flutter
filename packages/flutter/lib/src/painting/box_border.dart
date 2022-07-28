@@ -220,8 +220,8 @@ abstract class BoxBorder extends ShapeBorder {
       canvas.drawRRect(borderRadius.toRRect(rect), paint);
     } else {
       final RRect borderRect = borderRadius.toRRect(rect);
-      final RRect inner = borderRect.deflate(side.strokeInset);
-      final RRect outer = borderRect.inflate(side.strokeOutset);
+      final RRect inner = borderRect.deflate(side.strokeInset / 2);
+      final RRect outer = borderRect.inflate(side.strokeOutset / 2);
       canvas.drawDRRect(outer, inner, paint);
     }
   }
@@ -234,7 +234,7 @@ abstract class BoxBorder extends ShapeBorder {
 
   static void _paintUniformBorderWithRectangle(Canvas canvas, Rect rect, BorderSide side) {
     assert(side.style != BorderStyle.none);
-    canvas.drawRect(rect.inflate(side.strokeOffset), side.toPaint());
+    canvas.drawRect(rect.inflate(side.strokeOffset / 2), side.toPaint());
   }
 }
 
