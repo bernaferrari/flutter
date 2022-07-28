@@ -129,7 +129,7 @@ class BorderSide with Diagnosticable {
     return BorderSide(
       color: a.color, // == b.color
       width: a.width + b.width,
-      strokeAlign: (a.strokeAlign + b.strokeAlign) / 2,
+      strokeAlign: math.max(a.strokeAlign, b.strokeAlign),
       style: a.style, // == b.style
     );
   }
