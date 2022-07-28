@@ -220,8 +220,8 @@ abstract class BoxBorder extends ShapeBorder {
       canvas.drawRRect(borderRadius.toRRect(rect), paint);
     } else {
       final RRect borderRect = borderRadius.toRRect(rect);
-      final RRect inner = borderRect.deflate(side.strokeInset / 2);
-      final RRect outer = borderRect.inflate(side.strokeOutset / 2);
+      final RRect inner = borderRect.deflate(side.strokeInset);
+      final RRect outer = borderRect.inflate(side.strokeOutset);
       canvas.drawDRRect(outer, inner, paint);
     }
   }
@@ -694,9 +694,6 @@ class BorderDirectional extends BoxBorder {
   @override
   EdgeInsetsGeometry get dimensions {
     if (isUniform) {
-      // side.strokeAlign == StrokeAlign.inside => 0 -> side.width
-      // side.strokeAlign == BorderSide.strokeAlignCenter => 0.5 -> side.width / 2
-      // side.strokeAlign == BorderSide.strokeAlignOutside => 1 -> 0
       return EdgeInsetsDirectional.all(top.strokeInset);
     }
     return EdgeInsetsDirectional.fromSTEB(start.strokeInset, top.strokeInset, end.strokeInset, bottom.strokeInset);

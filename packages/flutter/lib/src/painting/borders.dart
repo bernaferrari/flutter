@@ -321,6 +321,12 @@ class BorderSide with Diagnosticable {
   ///
   /// This will return 0 for a [strokeAlign] of 1, and the width of the stroke for
   /// a [strokeAlign] of -1.
+  /// 
+  /// Example:
+  /// 
+  /// [strokeAlign] == [strokeAlignInside] (-1.0) => side.width
+  /// [strokeAlign] == [strokeAlignCenter] (0.0) => side.width / 2
+  /// [strokeAlign] == [strokeAlignOutside] (1.0) => 0
   double get strokeInset => width * (1 - (1 + strokeAlign) / 2);
 
   /// Get the amount of the stroke width that lies outside of the [BorderSide].
