@@ -420,9 +420,9 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
       child: AnimatedContainer(
         curve: Curves.fastOutSlowIn,
         duration: kThemeAnimationDuration,
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
           color: _circleColor(index),
-          shape: BoxShape.circle,
+          shape: const CircleBorder(),
         ),
         child: Center(
           child: _buildCircleChild(index, oldState && widget.steps[index].state == StepState.error),
