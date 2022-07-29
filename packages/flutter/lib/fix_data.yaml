@@ -17,6 +17,65 @@
 
 version: 1
 transforms:
+  - title: 'Remove BoxShape.rectangle'
+    date: 2022-07-27
+    element:
+      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      inClass: 'BoxDecoration'
+      constructor: ''
+    oneOf:
+    - if: "shape == 'BoxShape.rectangle'"
+      changes:
+        - kind: 'removeParameter'
+          name: 'shape'
+    variables:
+      shape:
+        kind: 'fragment'
+        value: 'arguments[shape]'
+  - title: 'Replace with ShapeDecoration'
+    date: 2022-07-27
+    element:
+      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      inClass: 'BoxDecoration'
+      constructor: ''
+    oneOf:
+    - if: "shape == 'BoxShape.circle'"
+      changes:
+        - kind: 'replacedBy'
+          newElement:
+            uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+            inClass: 'ShapeDecoration'
+            constructor: ''
+        - kind: 'addParameter'
+          index: 0
+          name: 'shape'
+          style: optional_named
+          argumentValue:
+            expression: '{% CircleBorder %}()'
+            requiredIf: "shape == 'BoxShape.circle'"
+            variables:
+              CircleBorder:
+                kind: 'import'
+                uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+                name: 'CircleBorder'
+        - kind: 'removeParameter'
+          name: 'boxShadow'
+        - kind: 'addParameter'
+          index: 5
+          name: 'shadows'
+          style: optional_named
+          argumentValue:
+            expression: '{% boxShadow %}'
+            requiredIf: "boxShadow != ''"
+        - kind: 'removeParameter'
+          name: 'shape'
+    variables:
+      shape:
+        kind: 'fragment'
+        value: 'arguments[shape]'
+      boxShadow:
+        kind: 'fragment'
+        value: 'arguments[boxShadow]'
   # Changes made in https://github.com/flutter/flutter/pull/105291
   - title: "Migrate 'ElevatedButton.styleFrom(primary)' to 'ElevatedButton.styleFrom(backgroundColor)'"
     date: 2022-05-27

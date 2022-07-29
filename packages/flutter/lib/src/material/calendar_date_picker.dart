@@ -970,15 +970,15 @@ class _DayPickerState extends State<_DayPicker> {
         final bool isSelectedDay = DateUtils.isSameDay(widget.selectedDate, dayToBuild);
         final bool isToday = DateUtils.isSameDay(widget.currentDate, dayToBuild);
 
-        BoxDecoration? decoration;
+        ShapeDecoration? decoration;
         Color dayColor = enabledDayColor;
         if (isSelectedDay) {
           // The selected day gets a circle background highlight, and a
           // contrasting text color.
           dayColor = selectedDayColor;
-          decoration = BoxDecoration(
+          decoration = ShapeDecoration(
             color: selectedDayBackground,
-            shape: BoxShape.circle,
+            shape: const CircleBorder(),
           );
         } else if (isDisabled) {
           dayColor = disabledDayColor;
@@ -986,9 +986,8 @@ class _DayPickerState extends State<_DayPicker> {
           // The current day gets a different text color and a circle stroke
           // border.
           dayColor = todayColor;
-          decoration = BoxDecoration(
-            border: Border.all(color: todayColor),
-            shape: BoxShape.circle,
+          decoration = ShapeDecoration(
+            shape: CircleBorder(side: BorderSide(color: todayColor)),
           );
         }
 

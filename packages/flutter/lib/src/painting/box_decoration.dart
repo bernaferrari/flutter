@@ -92,6 +92,10 @@ class BoxDecoration extends Decoration {
     this.boxShadow,
     this.gradient,
     this.backgroundBlendMode,
+    @Deprecated(
+      'Replace BoxDecoration(shape: BoxShape.circle) with ShapeDecoration(shape: const CircleBorder()). '
+      'This feature was deprecated after v3.3.0-0.0.pre.',
+    )
     this.shape = BoxShape.rectangle,
   }) : assert(shape != null),
        assert(
@@ -206,6 +210,10 @@ class BoxDecoration extends Decoration {
   /// [BoxShape.rectangle].
   ///
   /// {@macro flutter.painting.BoxDecoration.clip}
+  @Deprecated(
+    'Replace BoxDecoration(shape: BoxShape.circle) with ShapeDecoration(shape: const CircleBorder()). '
+    'This feature was deprecated after v3.3.0-0.0.pre.',
+  )
   final BoxShape shape;
 
   @override
