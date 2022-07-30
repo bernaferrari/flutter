@@ -532,7 +532,19 @@ class Border extends BoxBorder {
           return;
       }
     }
-
+    assert(() {
+      if (right.hasMultipleWidth || left.hasMultipleWidth || top.hasMultipleWidth || bottom.hasMultipleWidth) {
+        throw FlutterError.fromParts(<DiagnosticsNode>[
+          ErrorSummary('A Border does not support a BorderSide with multiple widths. Try to use Border(left: ...) instead.'),
+          ErrorDescription('The following is not uniform:'),
+          if (left.hasMultipleWidth) ErrorDescription('Border.left'),
+          if (top.hasMultipleWidth) ErrorDescription('Border.top'),
+          if (right.hasMultipleWidth) ErrorDescription('Border.right'),
+          if (bottom.hasMultipleWidth) ErrorDescription('Border.bottom'),
+        ]);
+      }
+      return true;
+    }());
     assert(() {
       if (borderRadius != null) {
         throw FlutterError.fromParts(<DiagnosticsNode>[
@@ -886,7 +898,20 @@ class BorderDirectional extends BoxBorder {
 
     assert(borderRadius == null, 'A borderRadius can only be given for uniform borders.');
     assert(shape == BoxShape.rectangle, 'A border can only be drawn as a circle if it is uniform.');
-    assert(_strokeAlignIsUniform && top.strokeAlign == BorderSide.strokeAlignInside, 'A Border can only draw strokeAlign different than strokeAlignInside on uniform borders.');
+    assert(_strokeAlignIsUniform && top.strokeAlign == StrokeAlign.inside, 'A Border can only draw strokeAlign different than StrokeAlign.inside on uniform borders.');
+    assert(() {
+      if (start.hasMultipleWidth || end.hasMultipleWidth || top.hasMultipleWidth || bottom.hasMultipleWidth) {
+        throw FlutterError.fromParts(<DiagnosticsNode>[
+          ErrorSummary('A BorderDirectional does not support a BorderSide with multiple widths. Try to use BorderDirectional(left: ...) instead.'),
+          ErrorDescription('The following is not uniform:'),
+          if (start.hasMultipleWidth) ErrorDescription('BorderDirectional.start'),
+          if (top.hasMultipleWidth) ErrorDescription('BorderDirectional.top'),
+          if (end.hasMultipleWidth) ErrorDescription('BorderDirectional.end'),
+          if (bottom.hasMultipleWidth) ErrorDescription('BorderDirectional.bottom'),
+        ]);
+      }
+      return true;
+    }());
 
     final BorderSide left, right;
     assert(textDirection != null, 'Non-uniform BorderDirectional objects require a TextDirection when painting.');
