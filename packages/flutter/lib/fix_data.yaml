@@ -17,10 +17,27 @@
 
 version: 1
 transforms:
+  # Changes made in https://github.com/flutter/flutter/pull/108052
+  - title: 'Remove BoxShape.rectangle'
+    date: 2022-08-03
+    element:
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      method: 'copyWith'
+      inClass: 'BoxDecoration'
+    oneOf:
+      - if: "shape == 'BoxShape.rectangle'"
+        changes:
+          - kind: 'removeParameter'
+            name: 'shape'
+    variables:
+      shape:
+        kind: 'fragment'
+        value: 'arguments[shape]'
+  # Changes made in https://github.com/flutter/flutter/pull/108052
   - title: 'Remove BoxShape.rectangle'
     date: 2022-07-27
     element:
-      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
@@ -32,18 +49,19 @@ transforms:
       shape:
         kind: 'fragment'
         value: 'arguments[shape]'
+  # Changes made in https://github.com/flutter/flutter/pull/108052
   - title: 'Replace with ShapeDecoration'
     date: 2022-07-27
     element:
-      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
-    - if: "shape == 'BoxShape.circle'"
+    - if: "shape == 'BoxShape.circle' && border == '' && backgroundBlendMode == ''"
       changes:
         - kind: 'replacedBy'
           newElement:
-            uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+            uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
             inClass: 'ShapeDecoration'
             constructor: ''
         - kind: 'addParameter'
@@ -56,7 +74,7 @@ transforms:
             variables:
               CircleBorder:
                 kind: 'import'
-                uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+                uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
                 name: 'CircleBorder'
         - kind: 'removeParameter'
           name: 'boxShadow'
@@ -69,6 +87,8 @@ transforms:
             requiredIf: "boxShadow != ''"
         - kind: 'removeParameter'
           name: 'shape'
+        - kind: 'removeParameter'
+          name: 'borderRadius'
     variables:
       shape:
         kind: 'fragment'
@@ -76,6 +96,21 @@ transforms:
       boxShadow:
         kind: 'fragment'
         value: 'arguments[boxShadow]'
+      border:
+        kind: 'fragment'
+        value: 'arguments[border]'
+      borderRadius:
+        kind: 'fragment'
+        value: 'arguments[borderRadius]'
+      backgroundBlendMode:
+        kind: 'fragment'
+        value: 'arguments[backgroundBlendMode]'
+      color:
+        kind: 'fragment'
+        value: 'arguments[color]'
+      gradient:
+        kind: 'fragment'
+        value: 'arguments[gradient]'
   # Changes made in https://github.com/flutter/flutter/pull/109070
   - title: "Remove 'selectedRowColor'"
     date: 2022-08-05
