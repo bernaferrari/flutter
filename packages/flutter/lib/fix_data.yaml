@@ -41,7 +41,7 @@ transforms:
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
-    - if: "shape == 'BoxShape.circle'"
+    - if: "shape == 'BoxShape.circle' && border == '' && backgroundBlendMode == ''"
       changes:
         - kind: 'replacedBy'
           newElement:
@@ -71,6 +71,8 @@ transforms:
             requiredIf: "boxShadow != ''"
         - kind: 'removeParameter'
           name: 'shape'
+        - kind: 'removeParameter'
+          name: 'borderRadius'
     variables:
       shape:
         kind: 'fragment'
@@ -78,6 +80,21 @@ transforms:
       boxShadow:
         kind: 'fragment'
         value: 'arguments[boxShadow]'
+      border:
+        kind: 'fragment'
+        value: 'arguments[border]'
+      borderRadius:
+        kind: 'fragment'
+        value: 'arguments[borderRadius]'
+      backgroundBlendMode:
+        kind: 'fragment'
+        value: 'arguments[backgroundBlendMode]'
+      color:
+        kind: 'fragment'
+        value: 'arguments[color]'
+      gradient:
+        kind: 'fragment'
+        value: 'arguments[gradient]'
   # Changes made in https://github.com/flutter/flutter/pull/105291
   - title: "Migrate 'ElevatedButton.styleFrom(primary)' to 'ElevatedButton.styleFrom(backgroundColor)'"
     date: 2022-05-27
