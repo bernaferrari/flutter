@@ -1,6 +1,8 @@
 import 'package:flutter/painting.dart';
 
 void main() {
+  BoxDecoration decoration;
+
   // Changes made in https://github.com/flutter/flutter/pull/105291
   const BoxDecoration(color: Color(0xFFFF0000), boxShadow: []);
   const BoxDecoration(
@@ -29,5 +31,9 @@ void main() {
     gradient: LinearGradient(
       colors: const [Color(0xFFFFFFFF), Color(0xFF000000)],
     ),
+  );
+  decoration.copyWith(
+    color: Color(0xFFFF0000),
+    shape: BoxShape.rectangle,
   );
 }

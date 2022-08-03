@@ -10,6 +10,7 @@ void main() {
   RenderObjectWidget renderObjectWidget;
   RenderObject renderObject;
   Object object;
+  BoxDecoration decoration;
 
   // Changes made in https://github.com/flutter/flutter/pull/44189
   const Element element = Element(myWidget);
@@ -213,5 +214,9 @@ void main() {
     gradient: LinearGradient(
       colors: const [Color(0xFFFFFFFF), Color(0xFF000000)],
     ),
+  );
+  decoration.copyWith(
+    color: Color(0xFFFF0000),
+    shape: BoxShape.rectangle,
   );
 }
