@@ -21,6 +21,38 @@ enum BorderStyle {
   // if you add more, think about how they will lerp
 }
 
+/// Temporary until we can land this on Flutter Engine.
+/// Expand inflate;
+extension RRectInflation on EdgeInsets {
+  /// Similar to [RRect.inflate] but receives a [Rect].
+  RRect inflateRRect(RRect rect) {
+    return RRect.fromLTRBAndCorners(
+      rect.left - left,
+      rect.top - top,
+      rect.right + right,
+      rect.bottom + bottom,
+      topLeft: rect.tlRadius + Radius.elliptical(left, top),
+      topRight: rect.trRadius + Radius.elliptical(right, top),
+      bottomRight: rect.brRadius + Radius.elliptical(right, bottom),
+      bottomLeft: rect.blRadius + Radius.elliptical(left, bottom),
+    );
+  }
+
+  /// Similar to [RRect.deflate] but receives a [Rect].
+  RRect deflateRRect(RRect rect) {
+    return RRect.fromLTRBAndCorners(
+      rect.left + left,
+      rect.top + top,
+      rect.right - right,
+      rect.bottom - bottom,
+      topLeft: rect.tlRadius - Radius.elliptical(left, top),
+      topRight: rect.trRadius - Radius.elliptical(right, top),
+      bottomRight: rect.brRadius - Radius.elliptical(right, bottom),
+      bottomLeft: rect.blRadius - Radius.elliptical(left, bottom),
+    );
+  }
+}
+
 /// A side of a border of a box.
 ///
 /// A [Border] consists of four [BorderSide] objects: [Border.top],
@@ -66,7 +98,7 @@ class BorderSide with Diagnosticable {
     this.color = const Color(0xFF000000),
     double width = 1.0,
     this.style = BorderStyle.solid,
-    this.strokeAlign = StrokeAlign.inside,
+    this.strokeAlign = BorderSide.strokeAlignInside,
   }) : leftWidth = width, topWidth = width, rightWidth = width, bottomWidth = width,
        hasMultipleWidth = false,
        assert(color != null),
@@ -84,7 +116,7 @@ class BorderSide with Diagnosticable {
     double horizontalWidth = 0.0,
     double verticalWidth = 0.0,
     this.style = BorderStyle.solid,
-    this.strokeAlign = StrokeAlign.inside,
+    this.strokeAlign = BorderSide.strokeAlignInside,
   }) : leftWidth = horizontalWidth, topWidth = verticalWidth, rightWidth = horizontalWidth, bottomWidth = verticalWidth,
        hasMultipleWidth = horizontalWidth != verticalWidth,
        assert(color != null),
@@ -103,7 +135,7 @@ class BorderSide with Diagnosticable {
     this.rightWidth = 0.0,
     this.bottomWidth = 0.0,
     this.style = BorderStyle.solid,
-    this.strokeAlign = StrokeAlign.inside,
+    this.strokeAlign = BorderSide.strokeAlignInside,
   }) : hasMultipleWidth = leftWidth != topWidth || topWidth != rightWidth || rightWidth != bottomWidth,
        assert(color != null),
        assert(leftWidth != null),
@@ -412,24 +444,22 @@ class BorderSide with Diagnosticable {
   void drawMultipleWidth(Canvas canvas, RRect borderRect) {
     final Paint paint = Paint()
       ..color = color;
+
     // Similar process to strokeInset calculation.
-    final RRect inner = borderRect.deflateWithRect(
-      Rect.fromLTRB(
+    final RRect inner = EdgeInsets.fromLTRB(
         leftWidth   * (1 - (1 + strokeAlign) / 2),
         topWidth    * (1 - (1 + strokeAlign) / 2),
         rightWidth  * (1 - (1 + strokeAlign) / 2),
         bottomWidth * (1 - (1 + strokeAlign) / 2),
-      ),
-    );
+      ).deflateRRect(borderRect);
+
     // Similar process to strokeOutset calculation.
-    final RRect outer = borderRect.inflateWithRect(
-      Rect.fromLTRB(
+    final RRect outer = EdgeInsets.fromLTRB(
         leftWidth   * (1 + strokeAlign) / 2,
         topWidth    * (1 + strokeAlign) / 2,
         rightWidth  * (1 + strokeAlign) / 2,
         bottomWidth * (1 + strokeAlign) / 2,
-      ),
-    );
+      ).inflateRRect(borderRect);
     canvas.drawDRRect(outer, inner, paint);
   }
 
@@ -490,7 +520,7 @@ class BorderSide with Diagnosticable {
     } else {
       properties.add(DoubleProperty('width', width, defaultValue: 1.0));
     }
-    properties.add(DoubleProperty('strokeAlign', strokeAlign, defaultValue: StrokeAlign.inside));
+    properties.add(DoubleProperty('strokeAlign', strokeAlign, defaultValue: BorderSide.strokeAlignInside));
     properties.add(EnumProperty<BorderStyle>('style', style, defaultValue: BorderStyle.solid));
   }
 }

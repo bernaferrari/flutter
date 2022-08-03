@@ -898,7 +898,7 @@ class BorderDirectional extends BoxBorder {
 
     assert(borderRadius == null, 'A borderRadius can only be given for uniform borders.');
     assert(shape == BoxShape.rectangle, 'A border can only be drawn as a circle if it is uniform.');
-    assert(_strokeAlignIsUniform && top.strokeAlign == StrokeAlign.inside, 'A Border can only draw strokeAlign different than StrokeAlign.inside on uniform borders.');
+    assert(_strokeAlignIsUniform && top.strokeAlign == BorderSide.strokeAlignInside, 'A Border can only draw strokeAlign different than BorderSide.strokeAlignInside on uniform borders.');
     assert(() {
       if (start.hasMultipleWidth || end.hasMultipleWidth || top.hasMultipleWidth || bottom.hasMultipleWidth) {
         throw FlutterError.fromParts(<DiagnosticsNode>[
