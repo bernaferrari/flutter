@@ -21,7 +21,7 @@ transforms:
   - title: 'Remove BoxShape.rectangle'
     date: 2022-07-27
     element:
-      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
@@ -37,7 +37,7 @@ transforms:
   - title: 'Replace with ShapeDecoration'
     date: 2022-07-27
     element:
-      uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
@@ -45,7 +45,7 @@ transforms:
       changes:
         - kind: 'replacedBy'
           newElement:
-            uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+            uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
             inClass: 'ShapeDecoration'
             constructor: ''
         - kind: 'addParameter'
@@ -58,7 +58,7 @@ transforms:
             variables:
               CircleBorder:
                 kind: 'import'
-                uris: [ 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+                uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
                 name: 'CircleBorder'
         - kind: 'removeParameter'
           name: 'boxShadow'
