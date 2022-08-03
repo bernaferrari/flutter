@@ -19,6 +19,22 @@ version: 1
 transforms:
   # Changes made in https://github.com/flutter/flutter/pull/108052
   - title: 'Remove BoxShape.rectangle'
+    date: 2022-08-03
+    element:
+      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      method: 'copyWith'
+      inClass: 'BoxDecoration'
+    oneOf:
+      - if: "shape == 'BoxShape.rectangle'"
+        changes:
+          - kind: 'removeParameter'
+            name: 'shape'
+    variables:
+      shape:
+        kind: 'fragment'
+        value: 'arguments[shape]'
+  # Changes made in https://github.com/flutter/flutter/pull/108052
+  - title: 'Remove BoxShape.rectangle'
     date: 2022-07-27
     element:
       uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
