@@ -17,6 +17,7 @@
 
 version: 1
 transforms:
+  # Changes made in https://github.com/flutter/flutter/pull/108052
   - title: 'Remove BoxShape.rectangle'
     date: 2022-07-27
     element:
@@ -32,6 +33,7 @@ transforms:
       shape:
         kind: 'fragment'
         value: 'arguments[shape]'
+  # Changes made in https://github.com/flutter/flutter/pull/108052
   - title: 'Replace with ShapeDecoration'
     date: 2022-07-27
     element:
