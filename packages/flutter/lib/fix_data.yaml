@@ -21,7 +21,7 @@ transforms:
   - title: 'Remove BoxShape.rectangle'
     date: 2022-08-03
     element:
-      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       method: 'copyWith'
       inClass: 'BoxDecoration'
     oneOf:
@@ -37,7 +37,7 @@ transforms:
   - title: 'Remove BoxShape.rectangle'
     date: 2022-07-27
     element:
-      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
@@ -53,7 +53,7 @@ transforms:
   - title: 'Replace with ShapeDecoration'
     date: 2022-07-27
     element:
-      uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+      uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
       inClass: 'BoxDecoration'
       constructor: ''
     oneOf:
@@ -61,7 +61,7 @@ transforms:
       changes:
         - kind: 'replacedBy'
           newElement:
-            uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+            uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
             inClass: 'ShapeDecoration'
             constructor: ''
         - kind: 'addParameter'
@@ -74,7 +74,7 @@ transforms:
             variables:
               CircleBorder:
                 kind: 'import'
-                uris: [ 'painting.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
+                uris: [ 'painting.dart', 'rendering.dart', 'widgets.dart', 'material.dart', 'cupertino.dart' ]
                 name: 'CircleBorder'
         - kind: 'removeParameter'
           name: 'boxShadow'
