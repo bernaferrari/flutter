@@ -229,4 +229,32 @@ void main() {
 
   // Change made in https://github.com/flutter/flutter/pull/100381
   SelectionOverlay.fadeDuration;
+
+  // Changes made in https://github.com/flutter/flutter/pull/105291
+  const BoxDecoration(color: Color(0xFFFF0000), boxShadow: []);
+  const BoxDecoration(
+    color: Color(0xFFFF0000),
+    boxShadow: [],
+  );
+  const BoxDecoration(
+    color: Color(0xFFFF0000),
+    boxShadow: [],
+    backgroundBlendMode: BlendMode.color,
+  );
+  const BoxDecoration(
+    color: Color(0xFFFF0000),
+    boxShadow: [],
+    border: Border.all(
+      color: Color(0xFF000000),
+      width: 2,
+    ),
+  );
+  const ShapeDecoration(
+    shape: CircleBorder(),
+    color: Color(0xFFFF0000),
+    shadows: [],
+    gradient: LinearGradient(
+      colors: const [Color(0xFFFFFFFF), Color(0xFF000000)],
+    ),
+  );
 }
