@@ -116,7 +116,7 @@ class BoxDecoration extends Decoration {
     BlendMode? backgroundBlendMode,
     @Deprecated(
       'Replace BoxDecoration(shape: BoxShape.circle) with ShapeDecoration(shape: const CircleBorder()). '
-          'This feature was deprecated after v3.3.0-0.0.pre.',
+      'This feature was deprecated after v3.3.0-0.0.pre.',
     )
     BoxShape? shape,
   }) {
