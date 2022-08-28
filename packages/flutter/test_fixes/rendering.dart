@@ -22,18 +22,18 @@ void main() {
   renderListWheelViewport.clipToSize;
 
   // Changes made in https://github.com/flutter/flutter/pull/105291
-  const BoxDecoration(color: Color(0xFFFF0000), boxShadow: []);
-  const BoxDecoration(
+  BoxDecoration(color: Color(0xFFFF0000), boxShadow: []);
+  BoxDecoration(
     shape: BoxShape.rectangle,
     color: Color(0xFFFF0000),
     boxShadow: [],
   );
-  const BoxDecoration(
+  BoxDecoration(
     color: Color(0xFFFF0000),
     boxShadow: [],
     backgroundBlendMode: BlendMode.color,
   );
-  const BoxDecoration(
+  BoxDecoration(
     color: Color(0xFFFF0000),
     boxShadow: [],
     border: Border.all(
@@ -41,7 +41,7 @@ void main() {
       width: 2,
     ),
   );
-  const BoxDecoration(
+  BoxDecoration(
     shape: BoxShape.circle,
     color: Color(0xFFFF0000),
     boxShadow: [],

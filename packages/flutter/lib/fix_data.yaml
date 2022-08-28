@@ -65,7 +65,7 @@ transforms:
             inClass: 'ShapeDecoration'
             constructor: ''
         - kind: 'addParameter'
-          index: 0
+          index: 1
           name: 'shape'
           style: optional_named
           argumentValue:
@@ -79,7 +79,7 @@ transforms:
         - kind: 'removeParameter'
           name: 'boxShadow'
         - kind: 'addParameter'
-          index: 5
+          index: 4
           name: 'shadows'
           style: optional_named
           argumentValue:
